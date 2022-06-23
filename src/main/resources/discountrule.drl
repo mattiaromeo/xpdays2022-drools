@@ -1,0 +1,15 @@
+import  org.example.drools.contribution.OrderRequest;
+
+rule "Discount for CARD payment above 10000"
+    when
+        request : OrderRequest( paymentType=="CARD" && totalPrice > 10000 );
+    then
+        request.setDiscount(15);
+end;
+
+rule "Discount for CARD payment below 10000"
+    when
+        request : OrderRequest( paymentType=="CARD" && totalPrice > 5000 && totalPrice < 10000 );
+    then
+        request.setDiscount(5);
+end;

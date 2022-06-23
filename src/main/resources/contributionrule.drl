@@ -1,0 +1,15 @@
+import  org.example.drools.contribution.ContributionRequest;
+
+rule "contribution for MAIN_OCCUPATION with income below 14658.44"
+    when
+        request : ContributionRequest( employmentType=="MAIN_OCCUPATION" && income<=14658.44 );
+    then
+        request.setContribution(751.25);
+end;
+
+rule "contribution for MAIN_OCCUPATION with income between 14658.44 and 63297.86"
+    when
+        request : ContributionRequest( employmentType=="MAIN_OCCUPATION" && income>14658.44 && income <=63297.86);
+    then
+        request.setContribution((request.getIncome()*0.205)/4);
+end;

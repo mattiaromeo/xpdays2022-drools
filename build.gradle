@@ -1,0 +1,34 @@
+plugins {
+    id 'java'
+    id("org.springframework.boot") version "2.7.0" apply false
+    id "io.spring.dependency-management" version "1.0.11.RELEASE"
+}
+
+group 'org.example'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencyManagement {
+    imports {
+        mavenBom(org.springframework.boot.gradle.plugin.SpringBootPlugin.BOM_COORDINATES)
+    }
+}
+
+dependencies {
+    implementation group: 'org.springframework.boot', name: 'spring-boot-starter'
+    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-web'
+
+    implementation group: 'org.drools', name: 'drools-core', version: '7.71.0.Final'
+    implementation group: 'org.drools', name: 'drools-compiler', version: '7.71.0.Final'
+    implementation group: 'org.drools', name: 'drools-mvel', version: '7.71.0.Final'
+
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
+}
+
+test {
+    useJUnitPlatform()
+}
