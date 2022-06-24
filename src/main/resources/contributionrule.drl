@@ -14,6 +14,20 @@ rule "contribution for MAIN_OCCUPATION with income between 14658.44 and 63297.86
         request.setContribution((request.getIncome()*0.205)/4);
 end;
 
+rule "contribution for MAIN_OCCUPATION with income between 63297.86 and 93281.02"
+    when
+        request : ContributionRequest( employmentType=="MAIN_OCCUPATION" && income>63297.86 && income <=93281.02);
+    then
+        request.setContribution(((63297.86*0.205)/4)+(((request.getIncome()-63297.86)*0.1416)/4));
+end;
+
+rule "contribution for MAIN_OCCUPATION with income above 93281.02"
+    when
+        request : ContributionRequest( employmentType=="MAIN_OCCUPATION" && income>93281.02);
+    then
+        request.setContribution(4305.42);
+end;
+
 rule "contribution for PARTIAL_OCCUPATION with income below 1621.71"
     when
         request : ContributionRequest( employmentType=="PARTIAL_OCCUPATION" && income<=1621.71);
@@ -32,5 +46,12 @@ rule "contribution for PARTIAL_OCCUPATION with income between 63297.86 and 93281
     when
         request : ContributionRequest( employmentType=="PARTIAL_OCCUPATION" && income>63297.86 && income <=93281.02);
     then
-        request.setContribution((request.getIncome()*0.1416)/4);
+        request.setContribution(((63297.86*0.205)/4)+(((request.getIncome()-63297.86)*0.1416)/4));
+end;
+
+rule "contribution for PARTIAL_OCCUPATION with income above 93281.02"
+    when
+        request : ContributionRequest( employmentType=="PARTIAL_OCCUPATION" && income>93281.02);
+    then
+        request.setContribution(4305.42);
 end;
